@@ -120,9 +120,20 @@ def get_adc_value():
     adc_value_list.append(S2.read())
     return adc_value_list
 
+def radius_calculator(theta, speed):
+    B = 11.7  # cm
+    L = 9.4  # cm
+    R = L* (1/tan(theta))
+    V_in = speed*(R-(B/2))
+    V_out = speed*(R+(B/2))
+
+    return V_in, V_out
+
 def set_power(speed):
-    set_motor_speed(1, speed)
-    set_motor_speed(2, speed) 
+    theta = PWM("P2")
+    V_in, V_out = radius_calculator(theta, speed)
+    set_motor_speed(1, V_in)
+    set_motor_speed(2, V_out) 
 
 def backward(speed):
     set_motor_speed(1, speed)
