@@ -1,0 +1,22 @@
+#!/usr/bin/python3
+try:
+
+  def forever():
+    pass
+
+  from ezblock import PWM
+  from ezblock import Servo
+  
+  pwm_P11 = PWM("P11")
+  
+  Servo(pwm_P11).angle(0)
+  
+  if __name__ == "__main__":
+    while True:
+      forever()
+except KeyboardInterrupt:
+  from ezblock import print
+  print("Program stops")
+except Exception as e:
+  from ezblock import print
+  print(e, tag="[ERROR]")
