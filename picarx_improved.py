@@ -134,26 +134,40 @@ def radius_calculator(theta, speed):
         V_out = speed*(R+(B/2))
 
     if abs(V_in) < 15:
-        V_in = np.sign(V_in) * 15
-    elif abs(V_out) < 15 :
-        V_out = np.sign(V_out) * 15
+        V_in = 15
+    if abs(V_out) < 15 :
+        V_out =  15
+    
+    
+    if abs(V_in) > 100:
+        V_in = 100
+    if abs(V_out) > 100 :
+        V_out =  100
 
 
-    return V_in, V_out
+    return abs(V_in), abs(V_out)
 
 def set_power(speed):
     global str_angle
     theta = str_angle
     V_in, V_out = radius_calculator(theta, speed)
-    set_motor_speed(1, V_in)
-    set_motor_speed(2, V_out)
+    if theta >= 0:
+        set_motor_speed(1, V_in)
+        set_motor_speed(2, V_out)
+    else:
+        set_motor_speed(1, V_out)
+        set_motor_speed(2, V_in)
 
 def backward(speed):
     global str_angle
     theta = str_angle
     V_in, V_out = radius_calculator(theta, speed)
-    set_motor_speed(1, V_in)
-    set_motor_speed(2, V_out)
+    if theta >= 0:
+        set_motor_speed(1, V_in)
+        set_motor_speed(2, V_out)
+    else:
+        set_motor_speed(1, V_out)
+        set_motor_speed(2, V_in)
 #    set_motor_speed(1, speed)
 #    set_motor_speed(2, speed)
 
@@ -161,8 +175,12 @@ def forward(speed):
     global str_angle
     theta = str_angle
     V_in, V_out = radius_calculator(theta, speed)
-    set_motor_speed(1,V_in)
-    set_motor_speed(2, V_out)
+    if theta >= 0:
+        set_motor_speed(1, -V_in)
+        set_motor_speed(2, -V_out)
+    else:
+        set_motor_speed(1, -V_out)
+        set_motor_speed(2, -V_in)
  
 #    set_motor_speed(1, -1*speed)
 #    set_motor_speed(2, -1*speed)
