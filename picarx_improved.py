@@ -123,8 +123,8 @@ def get_adc_value():
     return adc_value_list
 
 def radius_calculator(theta, speed):
-    B = 11.7  # cm
-    L = 9.4  # cm
+    B = 11.7*0.3  # cm
+    L = 9.4*0.3  # cm
     if theta == 0:
         V_in = speed
         V_out = speed
