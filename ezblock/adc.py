@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 #!/usr/bin/env python3
 from .i2c import I2C
 
@@ -98,5 +97,4 @@ def test():
         time.sleep(1)
 
 if __name__ == '__main__':
->>>>>>> Stashed changes
     test()

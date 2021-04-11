@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 from .utils import delay
 
 class MorseCode():
@@ -88,4 +87,3 @@ class MorseCode():
         if isinstance(msg, str):
             for s in msg:
                 self.play_char(s)
->>>>>>> Stashed changes

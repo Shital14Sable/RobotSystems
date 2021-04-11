@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 from .basic import _Basic_class
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import io
@@ -206,4 +205,4 @@ if __name__ == '__main__':
         Camera(0).start()
     except KeyboardInterrupt:
         print('KeyboardInterrupt')
->>>>>>> Stashed changes
+
