@@ -128,12 +128,11 @@ def radius_calculator(theta, speed):
     if theta == 0:
         V_in = speed
         V_out = speed
-    else:    
+    else:
         R = L*(1/np.tan(theta))
         V_in = speed*(R-(B/2))
         V_out = speed*(R+(B/2))
 
-    
     if abs(V_in) < 15:
         V_in = np.sign(V_in) * 15
     elif abs(V_out) < 15 :
@@ -160,11 +159,10 @@ def backward(speed):
 
 def forward(speed):
     global str_angle
-   
     theta = str_angle
     V_in, V_out = radius_calculator(theta, speed)
-    set_motor_speed(1,-V_in)
-    set_motor_speed(2, -V_out)
+    set_motor_speed(1,V_in)
+    set_motor_speed(2, V_out)
  
 #    set_motor_speed(1, -1*speed)
 #    set_motor_speed(2, -1*speed)
