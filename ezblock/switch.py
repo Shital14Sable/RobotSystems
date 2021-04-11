@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 from .pin import Pin
 
 class Switch(Pin):
