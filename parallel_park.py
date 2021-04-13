@@ -3,33 +3,30 @@ import time
 
 def parallel_park(park_dir):
     picarx_improved.set_dir_servo_angle(0)
-#    for i in range(500):
-#            picarx_improved.forward(30)
-#    time.sleep(2)
+#    picarx_improved.forward(50)
+#    time.sleep(0.6)
+    angle1= 27
+    power1 = 25
 
-    if park_dir == 'left':
-        picarx_improved.set_dir_servo_angle(-30)
+    if park_dir == 'right':
+        picarx_improved.set_dir_servo_angle(angle1)
     else:
-        picarx_improved.set_dir_servo_angle(30)
+        picarx_improved.set_dir_servo_angle(-angle1)
 
-    time.sleep(2)
-    for i in range(500):
-          picarx_improved.forward(30)
+    picarx_improved.backward(power1)
+    time.sleep(1)
 
-#    if park_dir == 'left':
-#        picarx_improved.set_dir_servo_angle(30)
-#    else:
-#        picarx_improved.set_dir_servo_angle(-30)
+    if park_dir == 'right':
+        picarx_improved.set_dir_servo_angle(-angle1)
+    else:
+        picarx_improved.set_dir_servo_angle(angle1)
 
-#    for i in range(500):
-#        picarx_improved.backward(30)
-
-#    picarx_improved.set_dir_servo_angle(0) 
-
-#    for i in range(500):
-#        picarx_improved.forward(30)
-
+    picarx_improved.backward(power1)
+    time.sleep(1)
+    picarx_improved.set_dir_servo_angle(0)
+    picarx_improved.forward(50)
+    time.sleep(0.3)
     picarx_improved.stop()
 
 if __name__ == "__main__":
-    parallel_park('left')
+    parallel_park('right')

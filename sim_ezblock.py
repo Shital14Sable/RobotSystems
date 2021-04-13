@@ -270,7 +270,6 @@ class PWM():
 
     def __init__(self, channel, debug="critical"):
         pass
-        super().__init__()
         if isinstance(channel, str):
             if channel.startswith("P"):
                 channel = int(channel[1:])

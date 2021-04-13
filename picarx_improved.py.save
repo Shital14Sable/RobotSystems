@@ -1,15 +1,10 @@
-import time
 try :
     from ezblock import *
-    from ezblock import __reset_mcu__
-    __reset_mcu__()
-    time.sleep (0.01)
 except ImportError :
-    print ("This computer does not appear to be a PiCar -X system \
-    (/opt/ezblock is not present). Shadowing hardware calls \
-    with substitute functions")
-from sim_ezblock import *
-
+    print("This computer does not appear to be a PiCar -X system \
+        (/ opt/ ezblock is not present ). \
+        Shadowing hardware calls with substitute functions ")
+    from sim_ezblock import *
 import atexit
 import numpy as np 
 import time
@@ -95,10 +90,8 @@ def dir_servo_angle_calibration(value):
     # dir_servo_pin.angle(dir_cal_value)
 
 def set_dir_servo_angle(value):
-    global str_angle
     global dir_cal_value
     dir_servo_pin.angle(value+dir_cal_value)
-    str_angle = value
 
 def camera_servo1_angle_calibration(value):
     global cam_cal_value_1
@@ -128,64 +121,37 @@ def get_adc_value():
     return adc_value_list
 
 def radius_calculator(theta, speed):
-    B = 11.7*0.3  # cm
-    L = 9.4*0.3  # cm
-    if theta == 0:
-        V_in = speed
-        V_out = speed
-    else:
-        R = L*(1/np.tan(theta))
-        V_in = speed*(R-(B/2))
-        V_out = speed*(R+(B/2))
-
-    if abs(V_in) < 15:
-        V_in = 15
-    if abs(V_out) < 15 :
-        V_out =  15
-    
-    
-    if abs(V_in) > 100:
-        V_in = 100
-    if abs(V_out) > 100 :
-        V_out =  100
+    B = 11.7  # cm
+    L = 9.4  # cm
+    R = L*(1/np.tan(theta))
+    V_in = speed*(R-(B/2))
+    V_out = speed*(R+(B/2))
 
 
-    return abs(V_in), abs(V_out)
+    return V_in, V_out
 
 def set_power(speed):
     global str_angle
-    theta = str_angle
+    theta = str_angle 
     V_in, V_out = radius_calculator(theta, speed)
-    if theta >= 0:
-        set_motor_speed(1, V_in)
-        set_motor_speed(2, V_out)
-    else:
-        set_motor_speed(1, V_out)
-        set_motor_speed(2, V_in)
+    set_motor_speed(1, V_in)
+    set_motor_speed(2, V_out) 
 
 def backward(speed):
     global str_angle
-    theta = str_angle
-    V_in, V_out = radius_calculator(theta, speed)
-    if theta >= 0:
-        set_motor_speed(1, V_in)
-        set_motor_speed(2, V_out)
-    else:
-        set_motor_speed(1, V_out)
-        set_motor_speed(2, V_in)
+    theta = 
+    V_in, V_ out = radius_calculator(theta, speed)
+    set_motor_speed(1, V_in)
+    set_motor_speed(2, V_out)
 #    set_motor_speed(1, speed)
 #    set_motor_speed(2, speed)
 
 def forward(speed):
-    global str_angle
-    theta = str_angle
+   
+    theta = PWM("P2")
     V_in, V_out = radius_calculator(theta, speed)
-    if theta <= 0:
-        set_motor_speed(1, -V_in)
-        set_motor_speed(2, -V_out)
-    else:
-        set_motor_speed(1, -V_out)
-        set_motor_speed(2, -V_in)
+    set_motor_speed(1,-V_in)
+    set_motor_speed(2, -V_out)
  
 #    set_motor_speed(1, -1*speed)
 #    set_motor_speed(2, -1*speed)
