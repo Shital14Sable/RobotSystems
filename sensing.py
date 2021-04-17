@@ -15,4 +15,4 @@ class Sensor():
 
 if __name__ == '__main__':
      abc = Sensor
-     abs.sensor_reading()
+     abc.sensor_reading()
