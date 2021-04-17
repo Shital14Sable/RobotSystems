@@ -55,7 +55,7 @@ class picarx_improved:
             pin.prescaler(PRESCALER)
 
 
-    def set_motor_speed(self, motor, speed):
+    def set_motor_speed(motor, speed):
         global cali_speed_value,cali_dir_value
         motor -= 1
         
@@ -74,7 +74,7 @@ class picarx_improved:
             motor_direction_pins[motor].low()
             motor_speed_pins[motor].pulse_width_percent(speed)
 
-    def motor_speed_calibration(self, value):
+    def motor_speed_calibration(value):
         global cali_speed_value,cali_dir_value
         cali_speed_value = value
         if value < 0:
@@ -84,7 +84,7 @@ class picarx_improved:
             cali_speed_value[0] = abs(cali_speed_value)
             cali_speed_value[1] = 0
 
-    def motor_direction_calibration(self, motor, value):
+    def motor_direction_calibration(motor, value):
         # 0: positive direction
         # 1:negative direction
         global cali_dir_value
@@ -93,46 +93,46 @@ class picarx_improved:
             cali_dir_value[motor] = -1*cali_dir_value[motor]
 
 
-    def dir_servo_angle_calibration(self, value):
+    def dir_servo_angle_calibration(value):
         global dir_cal_value
         dir_cal_value = value
         set_dir_servo_angle(dir_cal_value)
         # dir_servo_pin.angle(dir_cal_value)
 
-    def set_dir_servo_angle(self, value):
+    def set_dir_servo_angle(value):
         global str_angle
         global dir_cal_value
         dir_servo_pin.angle(value+dir_cal_value)
         str_angle = value
 
-    def camera_servo1_angle_calibration(self, value):
+    def camera_servo1_angle_calibration(value):
         global cam_cal_value_1
         cam_cal_value_1 = value
         set_camera_servo1_angle(cam_cal_value_1)
         # camera_servo_pin1.angle(cam_cal_value)
 
-    def camera_servo2_angle_calibration(self, value):
+    def camera_servo2_angle_calibration(value):
         global cam_cal_value_2
         cam_cal_value_2 = value
         set_camera_servo2_angle(cam_cal_value_2)
         # camera_servo_pin2.angle(cam_cal_value)
 
-    def set_camera_servo1_angle(self, value):
+    def set_camera_servo1_angle(value):
         global cam_cal_value_1
         camera_servo_pin1.angle(-1 *(value+cam_cal_value_1))
 
-    def set_camera_servo2_angle(self, value):
+    def set_camera_servo2_angle(value):
         global cam_cal_value_2
         camera_servo_pin2.angle(-1 * (value+cam_cal_value_2))
 
-    def get_adc_value(self):
+    def get_adc_value():
         adc_value_list = []
         adc_value_list.append(S0.read())
         adc_value_list.append(S1.read())
         adc_value_list.append(S2.read())
         return adc_value_list
 
-    def radius_calculator(self, theta, speed):
+    def radius_calculator(theta, speed):
         B = 11.7*0.3  # cm
         L = 9.4*0.3  # cm
         if theta == 0:
@@ -157,7 +157,7 @@ class picarx_improved:
 
         return abs(V_in), abs(V_out)
 
-    def set_power(self, speed):
+    def set_power(speed):
         global str_angle
         theta = str_angle
         V_in, V_out = radius_calculator(theta, speed)
@@ -168,7 +168,7 @@ class picarx_improved:
             set_motor_speed(1, V_out)
             set_motor_speed(2, V_in)
 
-    def backward(self, speed):
+    def backward(speed):
         global str_angle
         theta = str_angle
         V_in, V_out = radius_calculator(theta, speed)
@@ -181,7 +181,7 @@ class picarx_improved:
     #    set_motor_speed(1, speed)
     #    set_motor_speed(2, speed)
 
-    def forward(self, speed):
+    def forward(speed):
         global str_angle
         theta = str_angle
         V_in, V_out = radius_calculator(theta, speed)
@@ -196,12 +196,12 @@ class picarx_improved:
     #    set_motor_speed(2, -1*speed)
 
 
-    def stop(self):
+    def stop():
         set_motor_speed(1, 0)
         set_motor_speed(2, 0)
 
 
-    def Get_distance(self):
+    def Get_distance():
         timeout=0.01
         trig = Pin('D8')
         echo = Pin('D9')
@@ -227,7 +227,7 @@ class picarx_improved:
         #print(cm)
         return cm
         
-    def test(self):
+    def test():
         # dir_servo_angle_calibration(-10) 
         set_dir_servo_angle(-40)
         # time.sleep(1)
