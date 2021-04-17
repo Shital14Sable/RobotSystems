@@ -1,4 +1,4 @@
-import picarx_improved
+from picarx_improved import picarx_improved
 import time
 
 def parallel_park(park_dir):

@@ -1,4 +1,4 @@
-import picarx_improved
+from picarx_improved import picarx_improved
 from time import sleep
 
 picarx_improved.set_dir_servo_angle(0)
