@@ -8,7 +8,7 @@ except ImportError :
     print ("This computer does not appear to be a PiCar -X system \
     (/opt/ezblock is not present). Shadowing hardware calls \
     with substitute functions")
-from sim_ezblock import *
+    from sim_ezblock import *
 
 import atexit
 import numpy as np 
@@ -36,6 +36,7 @@ S0 = ADC('A0')
 S1 = ADC('A1')
 S2 = ADC('A2')
 
+str_angle = 0
 Servo_dir_flag = 1
 dir_cal_value = 0
 cam_cal_value_1 = 0
